@@ -1,0 +1,175 @@
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+		<title>Dashboard</title>
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
+		<script src='https://unpkg.com/axios/dist/axios.min.js'></script>
+	</head>
+	<body>
+
+		<div
+			class='modal fade'
+			id='addPost'
+			tabindex='-1'
+			aria-labelledby='addPostModalLabel'
+			aria-hidden='true'
+		>
+			<div class='modal-dialog'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h5 class='modal-title' id='addPostModalLabel'>Add post</h5>
+						<button
+							type='button'
+							class='btn-close'
+							data-bs-dismiss='modal'
+							aria-label='Close'
+						></button>
+					</div>
+					<div class='modal-body'>
+						<form>
+							<div class='mb-3'>
+								<label
+									for='recipient-name'
+									class='col-form-label'
+								>Title:</label>
+								<input
+									type='text'
+									class='form-control'
+									id='title-name'
+								/>
+							</div>
+							<div class='mb-3'>
+								<label
+									for='message-text'
+									class='col-form-label'
+								>Message:</label>
+								<textarea
+									class='form-control'
+									id='message-text'
+								></textarea>
+							</div>
+						</form>
+					</div>
+					<div class='modal-footer'>
+						<button
+							type='button'
+							class='btn btn-secondary'
+							data-bs-dismiss='modal'
+						>Close</button>
+						<button
+							type='button'
+							class='btn btn-primary'
+							id='submit'
+						>Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div
+			class='modal fade'
+			id='editModal'
+			tabindex='-1'
+			aria-labelledby='editModalLabel'
+			aria-hidden='true'
+		>
+			<div class='modal-dialog'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h5 class='modal-title' id='editModalLabel'>Edit post</h5>
+						<button
+							type='button'
+							class='btn-close'
+							data-bs-dismiss='modal'
+							aria-label='Close'
+						></button>
+					</div>
+					<div class='modal-body'>
+						<form>
+							<div class='mb-3'>
+								<label
+									for='edit-title-text'
+									class='col-form-label'
+								>Title:</label>
+								<span id='edit-id' hidden></span>
+								<input
+									type='text'
+									class='form-control'
+									id='edit-title-text'
+								/>
+							</div>
+							<div class='mb-3'>
+								<label
+									for='edit-message-text'
+									class='col-form-label'
+								>Message:</label>
+								<textarea
+									class='form-control'
+									id='edit-message-text'
+								></textarea>
+							</div>
+						</form>
+					</div>
+					<div class='modal-footer'>
+						<button
+							type='button'
+							class='btn btn-secondary'
+							data-bs-dismiss='modal'
+						>Close</button>
+						<button
+							type='button'
+							class='btn btn-primary'
+							id='submit-edited-post'
+						>Submit</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class='text-center fs-1 my-5'>Welcome to your Dashboard, {{user}}</p>
+		{{#if hasPosts}}
+			{{#each posts}}
+				<div class='container my-5'>
+					<div
+						class='d-flex flex-row justify-content-between bg-dark text-white p-4 flex-wrap'
+					>
+						<span class='fs-4 title'>{{this.title}}</span>
+						<span class='fs-4'>
+							{{this.createdAt}}</span>
+					</div>
+					<div class='fs-3 text border p-4'>
+						<p class='fs-3 message'>
+							{{this.message}}
+						</p>
+						<div class='d-flex justify-content-end'>
+							<button
+								class='btn btn-danger delete-comment mx-2'
+								data-id={{this.id}}
+								data-toggle='modal'
+								data-target='#deleteModal'
+							>Delete</button>
+							<button
+								class='btn btn-info add-comment'
+								data-bs-toggle='modal'
+								data-bs-target='#editModal'
+								data-bs-whatever='@mdo'
+								data-id={{this.id}}
+							>Edit</button>
+						</div>
+					</div>
+				</div>
+			{{/each}}
+		{{else}}
+			<p class='fs-4 my-5 text-center'>No posts found. Add some!</p>
+		{{/if}}
+		<div class='container d-flex justify-content-center my-4'>
+			<button
+				class='btn btn-primary'
+				data-bs-toggle='modal'
+				data-bs-target='#addPost'
+				data-bs-whatever='@getbootstrap'
+			>Add post</button>
+		</div>
+	</body>
+	<script src='js/dashboard.js'></script>
+</html>

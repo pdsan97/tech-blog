@@ -1,0 +1,113 @@
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+		<title>Page Title</title>
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
+
+	</head>
+	<body>
+		<div
+			class='modal fade'
+			id='commentModal'
+			tabindex='-1'
+			aria-labelledby='commentModalLabel'
+			aria-hidden='true'
+		>
+			<div class='modal-dialog'>
+				<div class='modal-content'>
+					<div class='modal-header'>
+						<h5 class='modal-title' id='commentModalLabel'>Add
+							comment</h5>
+						<button
+							type='button'
+							class='btn-close'
+							data-bs-dismiss='modal'
+							aria-label='Close'
+						></button>
+					</div>
+					<div class='modal-body'>
+						<form>
+							<div class='mb-3'>
+								<label
+									for='message-text'
+									class='col-form-label'
+								>Message:</label>
+								<span id='data-id' hidden></span>
+								<textarea
+									class='form-control'
+									id='message-text'
+								></textarea>
+							</div>
+						</form>
+					</div>
+					<div class='modal-footer'>
+						<button
+							type='button'
+							class='btn btn-secondary'
+							data-bs-dismiss='modal'
+						>Close</button>
+						<button
+							type='button'
+							id='submit'
+							class='btn btn-primary'
+						>Submit
+						</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		{{#if hasPosts}}
+			{{#each posts}}
+				<div class='container my-5'>
+					<div
+						class='d-flex flex-row justify-content-between bg-dark text-white p-4 flex-wrap'
+					>
+						<span class='fs-4'>{{this.title}}</span>
+						<span class='fs-4'>Posted by
+							{{this.createdBy}}
+							on
+							{{this.createdAt}}</span>
+					</div>
+					<div class='text border p-4'>
+						<span class='message fs-4'>
+							{{this.message}}
+						</span>
+						<div class='d-flex justify-content-end'>
+							{{#if @root.isLoggedIn}}
+								<button
+									class='btn btn-info add-comment my-2'
+									data-bs-toggle='modal'
+									data-bs-target='#commentModal'
+									data-bs-whatever='@mdo'
+									data-id={{this.id}}
+								>Add comment</button>
+							{{else}}
+								<a class='btn btn-info my-2' href='/login'>Add
+									comment</a>
+
+							{{/if}}
+						</div>
+					</div>
+					{{#each this.comments}}
+						<div
+							class='container border p-4'
+							style='background-color:#f1f4f7;'
+						>
+							<p class='fs-4'>Posted by
+								{{this.createdBy}}
+								on
+								{{this.createdAt}}</p>
+							<div
+								class='fs-5 text bg-faded'
+							>{{this.message}}</div>
+						</div>
+					{{/each}}
+				</div>
+			{{/each}}
+		{{else}}
+			<p class='fs-2 my-5 text-center'>No posts found</p>
+		{{/if}}
+		<script src='js/homepage.js'></script>
+	</body>
+</html>

@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<meta charset='utf-8' />
+		<meta http-equiv='X-UA-Compatible' content='IE=edge' />
+		<title>Login</title>
+		<meta name='viewport' content='width=device-width, initial-scale=1' />
+	</head>
+	<body>
+		<p
+			class='my-4 container fs-4 bg-dark text-white p-2 fw-bold rounded'
+		>Login</p>
+
+		<form class='container my-4 p-3 rounded border' id='login'>
+			<div class='mb-3'>
+				<label
+					for='exampleFormControlInput1'
+					class='form-label'
+				>Username</label>
+				<input
+					type='text'
+					class='form-control'
+					id='exampleFormControlInput1'
+					placeholder='John Doe'
+				/>
+			</div>
+			<div class='mb-3'>
+				<label
+					for='exampleFormControlTextarea1'
+					class='form-label'
+				>Password</label>
+				<input
+					type='password'
+					class='form-control'
+					id='exampleFormControlInput2'
+					placeholder='cats123'
+				/>
+			</div>
+			<p class='error text-danger text-center'></p>
+			<div class='d-flex justify-content-center'>
+				<button
+					type='submit'
+					class='btn btn-primary px-5 fs-6 fw-bold'
+				>Login</button>
+			</div>
+			<div class='d-flex justify-content-center'>
+				<a
+					href='/signup'
+					class='nav-link text-secondary text-center hover-primary'
+				>Sign up instead</a>
+			</div>
+
+		</form>
+		<script src='js/login.js'></script>
+	</body>
+</html>
